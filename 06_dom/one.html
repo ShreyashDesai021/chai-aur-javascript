@@ -1,0 +1,211 @@
+<!-- // DOM : Document Object Model is a programming interface for web documents. It 
+represents the page so that programs can change the document structure, style, 
+and content. The DOM represents the document as nodes and objects; that way, 
+programming languages can interact with the page. -->
+
+<!-- // Example of a simple HTML document to demonstrate DOM structure
+//DOM structure can be visualized as a tree of nodes, where each element, attribute, and piece of text is a node in the tree.
+//====================+++++++++DOM tree Drawn in notebook++++++++++++======================//  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Learning</title>
+    <style>
+        .bg-black{
+            background-color: #212121; /* Dark background color */
+            color: #ffffff;   /* White text for better contrast */
+        }
+    </style>
+</head>
+<body class="bg-black">
+    <div >
+        <h1 id="title" class="heading" >DOM Learning on Chai Aur Code <span style="display:none;">test text</span></h1>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <input type="password" name="" id="">
+
+        <ul>
+            <li class="list-item">one</li>
+            <li class="list-item">two</li>
+            <li class="list-item">three</li>
+            <li class="list-item">four</li>
+        </ul>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--In inspect console:
+document.getElementById("title") // helps to select the element with the specified ID.
+<h1 id=​"title" class=​"heading">​DOM Learning on Chai Aur Code​</h1>​
+
+document.getElementById("title").id // helps to get the value of the id attribute of the selected element.
+'title'
+
+document.getElementById("title").class // returns undefined because 'class' is a reserved keyword in JavaScript.
+undefined
+
+document.getElementById("title").className // helps to get the value of the class attribute of the selected element.
+'heading'
+
+document.getElementById("title").getAttribute(id) // throws an error because id is not defined as a variable.
+VM319:1 Uncaught ReferenceError: id is not defined
+    at <anonymous>:1:47
+(anonymous) @ VM319:1Understand this error
+
+document.getElementById("title").getAttribute('id') // helps to get the value of the specified attribute of the selected element.
+'title'
+
+document.getElementById("title").getAttribute('class') // helps to get the value of the specified attribute of the selected element.
+'heading'
+
+document.getElementById("title").setAttribute('class','test') // helps to set the value of the specified attribute of the selected element
+                                                              // Here, it changes the class attribute to 'test', by overwriting the previous value.
+undefined
+
+document.getElementById("title").setAttribute('class','test heading') // helps to set the value of the specified attribute of the selected element
+                                                              // Here, it changes the class attribute to 'test heading', by overwriting the previous value.
+
+undefined
+
+const title = document.getElementById("title") // assigns the selected element to the variable 'title'.
+undefined 
+
+title
+<h1 id=​"title" class=​"test heading">​DOM Learning on Chai Aur Code​</h1>​ // displays the element stored in the variable 'title'.
+
+title.style.backgroundColor = 'green' // helps to set the background color of the selected element to green.
+'green'
+
+title.style.padding = '15px'
+'15px'
+
+title.style.borderRadius = '15px'
+'15px'
+
+
+title.textContent // helps to get or set the text content of the selected element, excluding any HTML tags.
+'DOM Learning on Chai Aur Code test text'
+
+title.innerText // helps to get or set the text content of the selected element, excluding any hidden text.
+'DOM Learning on Chai Aur Code'
+
+title.innerHTML // helps to get or set the HTML content of the selected element, including any HTML tags.
+'DOM Learning on Chai Aur Code <span style="display:none;">test text</span>'
+
+document.getElementsByClassName('heading') // helps to select all elements with the specified class name.
+HTMLCollection [h1#title.heading, title: h1#title.heading]
+
+document.querySelector('h2') // helps to select the first element that matches the specified CSS selector.
+<h2>​Lorem ipsum dolor sit.​</h2>​
+
+
+document.querySelector('#title') // for ID
+<h1 id=​"title" class=​"heading">​…​</h1>​
+
+document.querySelector('.heading') // for Class
+<h1 id=​"title" class=​"heading">​…​</h1>​
+
+document.querySelector('input[type="password"]') // for input type
+<input type=​"password" name id fdprocessedid=​"1u39np" data-listener-added_e987da55=​"true">​
+
+
+document.querySelector('ul') // helps to select the first <ul> element in the document.
+<ul>​…​</ul>​
+
+const myul = document.querySelector('ul') // assigns the selected <ul> element to the variable 'myul'.
+undefined
+
+myul.querySelector('li') // helps to select the first <li> element within the 'myul' element.
+<li>​…​</li>​
+
+const turnGreen = myul.querySelector('li') // assigns the selected <li> element to the variable 'turnGreen'.
+undefined
+
+turnGreen.style.backgroundColor = "green" // helps to set the background color of the selected <li> element to green.
+'green'
+
+turnGreen.style.padding = "10px" // helps to set the padding of the selected <li> element to 10 pixels.
+'10px'
+
+turnGreen.innerText // helps to get the text content of the selected <li> element.
+'one'
+
+turnGreen.innerText = "five" // changes the text content of the selected <li> element to
+'five'
+
+const tempLiList = document.querySelectorAll('li') // helps to select all <li> elements in the document and returns a NodeList.
+undefined
+
+tempLiList // displays the NodeList of all selected <li> elements.
+NodeList(3) [li, li, li]
+
+tempLiList.style.color = 'green' // throws an error because NodeList does not have a style property.
+VM420:1 Uncaught TypeError: Cannot set properties of undefined (setting 'color')
+    at <anonymous>:1:24
+(anonymous) @ VM420:1Understand this error
+
+tempLiList[0].style.color = 'green' // helps to set the text color of the first <li> element in the NodeList to green.
+'green'
+
+const myH1 = document.querySelectorAll('h1') // helps to select all <h1> elements in the document and returns a NodeList.
+undefined
+
+myH1 // displays the NodeList of all selected <h1> elements.
+NodeList [h1#title.heading]
+
+myH1.style.color = 'green' // throws an error because NodeList does not have a style property. // common mistake as there is only one h1 tag
+VM450:1 Uncaught TypeError: Cannot set properties of undefined (setting 'color')
+    at <anonymous>:1:18
+(anonymous) @ VM450:1Understand this error
+
+myH1[0].style.color = 'green' // helps to set the text color of the first <h1> element in the NodeList to green.
+'green'
+
+tempLiList.forEach(function (l) { // helps to iterate over each <li> element in the NodeList and set its background color to green.
+    l.style.backgroundColor = "green"
+})
+undefined
+
+document.getElementsByClassName("list-item")  // helps to select all elements with the specified class name and returns an HTMLCollection.
+HTMLCollection(4) [li.list-item, li.list-item, li.list-item, li.list-item] 
+
+const tempClassList = document.getElementsByClassName("list-item") // assigns the selected elements with the specified class name to the variable 'tempClassList'.
+undefined
+
+console.log(tempClassList)
+VM898:1 HTMLCollection(4) [li.list-item, li.list-item, li.list-item, li.list-item]
+
+Array.from(tempClassList) // helps to convert the HTMLCollection into an array.
+(4) [li.list-item, li.list-item, li.list-item, li.list-item] 
+
+const myConvertedArray = Array.from(tempClassList) // assigns the converted array to the variable 'myConvertedArray'.
+undefined
+ 
+myConvertedArray // displays the array of elements that were converted from the HTMLCollection.
+(4) [li.list-item, li.list-item, li.list-item, li.list-item] 
+
+
+myConvertedArray.forEach(function (li) { // helps to iterate over each element in the array and set its text color to orange.
+    li.style.color = 'orange'
+})
+undefined
+--> 
