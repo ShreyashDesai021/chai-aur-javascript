@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM | Chai Aur Code</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <div class="parent">
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+    </div>
+</body>
+<script>
+    const parent = document.querySelector('.parent');
+    console.log(parent); // <div class="parent">...</div>
+                            // The parent div element
+    console.log(parent.children); // HTMLCollection(4) [div#m.day, div.day, div.day, div.day]
+                                  // Collection of all child elements with class "day"
+    console.log(parent.children[0].innerHTML); // Monday
+
+    for(let i = 0; i < parent.children.length; i++) {
+        console.log(parent.children[i].innerHTML);
+        // Logs each day's name: Monday, Tuesday, Wednesday, Thursday
+    }
+
+    parent.children[1].style.color = "green"; // Changes the text color of "Tuesday" to green
+
+    console.log(parent.firstElementChild); // to access first child element
+    console.log(parent.lastElementChild); // to access last child element
+
+    const dayOne = document.querySelector('.day') // selects the first element with class "day" (Monday)
+    console.log(dayOne);  //child to parent approach is used for memory optimization by not making the tree again 
+                          // from parent if we have already stored child in a variable
+    console.log(dayOne.parentElement); // to access parent element of dayOne
+    console.log(dayOne.previousElementSibling); // to access previous sibling element of dayOne (
+    console.log(dayOne.nextElementSibling); // to access next sibling element of dayOne
+                                            
+
+    console.log("NODES: ", parent.childNodes); // NodeList(9) [text, div.day, text, div.day, text, div.day, text, div.day, text]
+                                       // Collection of all child nodes including text nodes
+                                       //helps to access text nodes as well as per the DOM tree structure
+</script>
+</html>
