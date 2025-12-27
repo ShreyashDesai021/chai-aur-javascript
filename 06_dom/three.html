@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chai Aur Code</title>
+</head>
+<body style="background-color : #212121; color : #fff"; >
+    
+</body>
+<script>
+    const div = document.createElement('div');
+    console.log(div)
+    div.class = "main"
+    div.id = Math.round(Math.random() * 10 +1);
+    div.setAttribute("title","generated title");
+    div.style.backgroundColor = "green";
+    div.style.padding = "12px";
+
+    //div.innerText = "Chai Aur Code"; // this way overwrites the values and then set 
+    
+    const addText = document.createTextNode("Chai aur Code")
+    div.appendChild(addText); // this way saves one round trip
+                              // see which is better for performace later one
+   
+   
+   //the above div is not yet in the DOM tree, it is just created in memory, to add it to the DOM tree we use append or appendChild method
+
+    document.body.appendChild(div); // now the div is added to the DOM tree and will be visible on the page
+</script>
+</html>
