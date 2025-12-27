@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chai Aur Code | DOM</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <ul class="language">
+        <li>JavaScript</li>
+    </ul>
+</body>
+<script>
+    function addLanguage(langName){
+        const li = document.createElement('li');
+        li.innerHTML = `${langName}`
+
+        document.querySelector('.language').appendChild(li)
+    
+    }
+    addLanguage("Python")  // calling the function to add a new language
+    addLanguage("TypeScript") // but this is not efficient because we have to tarverse the DOM tree again and again for each new language
+    
+    function addOptiLanguage(langName){
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(langName))
+        document.querySelector('.language').appendChild(li)
+    }
+    addOptiLanguage('Java') // this is more efficient because we are not using innerHTML which causes re-parsing of the DOM tree
+                            // instead we are directly creating a text node and appending it to the li element
+
+
+    //EDIT:
+
+    const secondLang = document.querySelector("li:nth-child(2)") // selects the second li element
+    console.log(secondLang);
+    //secondLang.innerHTML = "Mojo" 
+    const newli = document.createElement('li')
+    newli.textContent = "Mojo" 
+    secondLang.replaceWith(newli) // replaces the second li element with the new li element
+
+    
+    const firstLang = document.querySelector("li:first-child") // selects the first li element
+    firstLang.outerHTML = '<li>Java</li>' // replaces the selected i.e first li element with the new li element using outerHTML
+
+    //REMOVE:
+    const lastLang = document.querySelector('li:last-child') // selects the last li element
+    lastLang.remove() // removes the selected li i.e last li element
+</script>
+</html>
