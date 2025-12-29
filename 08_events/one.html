@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMLEvents </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+           <!--  <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                 alt="" onclick="alert('owl')"></li> // example of inline event handler, but not recommended for use-->
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+    // document.getElementById('owl').onclick = function (){ // this approach is also not that recommended as it limits to one event handler only and doen't propagate
+    //     alert('owl clicked')
+    // } 
+
+    // attachEvent() // (old Internet Explorer only) now not recommended
+
+    // jQuery - on() // popular library for DOM manipulation and event handling but not needed now with modern JS
+ // =============================================================================================================================
+
+   // .addEventListener has three parameters: event type, event handler function, and useCapture boolean , useCapture is optional and defaults to false
+    
+   // Read for interviews more about Event object properties:
+    // type, timestamp, defaultPrevented
+    // target, toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode
+   
+   document.getElementById('owl').addEventListener('click', function(e){ // recommended way to add event listeners, allows multiple handlers and event propagation
+        alert('owl clicked - using addEventListener')
+        console.log(e);
+    },false); // false for bubbling phase, true for capturing phase  = what does useCapture mean? It means whether the
+    //  event should be captured during the capturing phase (true) or the bubbling phase (false).
+    // Event Propagation: Capturing and Bubbling
+    // Capturing Phase: The event starts from the window and goes down to the target element
+    // Bubbling Phase: The event starts from the target element and goes up to the window
+    // By default, event listeners are added in the bubbling phase (useCapture = false)
+    // Some events do not bubble, like focus and blur events. For these events, useCapture must be set to true to capture them during the capturing phase.
+    // function(e) here e is the event object that contains information about the event that occurred. It is useful for accessing properties like the target element, event type, etc.
+   
+    // Lets understand useCapture with an example:
+
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("clicked inside the ul");
+    // }, false)
+
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log("owl clicked");
+       
+    // }, false)
+    
+    // If you click on the owl image, both event handlers will be triggered because of event bubbling.
+    // First, the owl image's click event handler will execute, logging "owl clicked".
+    // Then, the click event will bubble up to the ul element, triggering its click event handler and logging "clicked inside the ul".
+    // This demonstrates how events propagate in the bubbling phase when useCapture is set to false.
+    // i.e event first captured by the most specific element (the target) and then propagated to less specific elements (ancestors).
+    // down to top approach
+
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("clicked inside the ul - capturing phase");
+    // }, true) // true for capturing phase
+
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log("owl clicked - capturing phase");
+    // }, true) 
+   
+    // If you click on the owl image now, both event handlers will still be triggered, but in a different order because of event capturing.
+    // First, the ul element's click event handler will execute, logging "clicked inside the ul - capturing phase".
+    // Then, the event will continue to propagate down to the owl image, triggering its click event handler and logging "owl clicked - capturing phase".
+    // This demonstrates how events propagate in the capturing phase when useCapture is set to true.
+    // i.e event first captured by the least specific element (the ancestor) and then propagated to more specific elements (the target).
+    // top to down approach
+
+    // Why it is important to understand event propagation?
+    // Understanding event propagation is crucial for effective event handling in web development. It helps in:
+    // 1. Preventing unwanted behavior: By controlling propagation, you can prevent events from triggering handlers on ancestor elements when not desired.
+    // 2. Implementing event delegation: You can attach a single event listener to a parent element to manage events for multiple child elements.
+    // 3. Debugging: Knowing how events propagate aids in diagnosing issues related to event handling in complex DOM structures.
+   
+   
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("clicked inside the ul - capturing phase");
+    // }, false) 
+
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log("owl clicked - capturing phase");
+    //     e.stopPropagation(); // stops the event from propagating further
+    // }, false) 
+   
+    // // In this example, when you click on the owl image, only the owl's click event handler will execute, logging "owl clicked - capturing phase".
+    // // The event will not bubble up to the ul element because e.stopPropagation() is called in the owl's event handler.
+    // // This demonstrates how e.stopPropagation() can be used to prevent further propagation of an event in the bubbling phase.
+   
+    // document.getElementById('google').addEventListener('click',function(e){
+    //     e.preventDefault(); // prevents the default action of the event, in this case, navigating to google.com
+    //     e.stopPropagation() // stops the event from propagating further otherwise it will also trigger the ul click event
+    //     console.log("google clicked");
+    // }, false)
+
+    // Lets make a event that will disappear the image when clicked
+    // Note that we just dont want to disapppeat the image the li element should also be removed from the DOM
+    
+    document.querySelector('#images').addEventListener('click', function(e){
+        console.log(e.target.tagName); // to check which element was clicked
+        if (e.target.tagName === 'IMG') { // check if the clicked element is an image so that clicking on ul or li doesn't remove them
+            console.log(e.target.id); // to check which image was clicked
+            let removeIt = e.target.parentNode // get the parent li of the clicked image
+            removeIt.remove() // remove the li element which contains the clicked image
+        }
+        }, false) 
+    
+    
+   </script>          
+</html>
