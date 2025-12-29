@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body bgcolor="212121" color="white" >
+    <h1 style="color: white;">Chai Aur Code</h1>
+    <button><div id="stop">Stop</div></button>
+
+</body>
+<script>
+
+    const sayShreyash = function() {
+        console.log("Shreyash")
+    }
+
+    const changeText = function(){
+        document.querySelector('h1').
+        innerHTML = "Best JS Series"
+
+    }
+    setTimeout(sayShreyash,2000)  // setTimeout is used to call a function after a specified delay
+                                  // first parameter just pass reference dont call the function with ()
+                                  // why because we want to call it after 2 seconds not now 
+
+    const changeMe = setTimeout(changeText,2000)
+
+    document.querySelector('#stop').addEventListener('click',function(){
+        clearTimeout(changeMe) // clearTimeout is used to stop the setTimeout function from executing 
+        console.log("Stopped!")
+    }) 
+
+</script>
+</html>
