@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body bgcolor="212121" color="white" >
+    <h1 style="color: white;">Chai Aur Javascript</h1>
+    <button><div id="start">Start</div></button>
+    <button><div id="stop">Stop</div></button>
+
+</body>
+<script>
+    const sayDate = function(str){
+        console.log(str, Date.now())
+    }
+
+    document.querySelector('#start').addEventListener('click',function(){
+        intervalId = setInterval(sayDate,2000,"Hello") // setInterval is used to call a function repeatedly at specified intervals
+                                  // first parameter is reference to the function // second parameter is time in milliseconds
+                                  // third parameter onwards are the parameters to be passed to the function being called, these are optional
+                                  // these parameters will be passed to the function when it is called
+    })
+    
+
+    document.querySelector('#stop').addEventListener('click',function(){
+        console.log("Stopped!")
+        clearInterval(intervalId) // clearInterval is used to stop the setInterval function from executing
+                                  // it takes the intervalId returned by setInterval as parameter
+    })
+
+</script>
+</html>
