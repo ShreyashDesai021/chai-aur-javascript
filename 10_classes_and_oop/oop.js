@@ -1,4 +1,4 @@
-//object literal :
+3//object literal :
 
 const user = {
     username: "hitesh",
@@ -102,3 +102,5 @@ console.log(auto instanceof Object);
 // commot
 
 // commit3
+
+//commit 3
