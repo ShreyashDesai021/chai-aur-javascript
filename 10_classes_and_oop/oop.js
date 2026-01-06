@@ -100,3 +100,5 @@ console.log(auto instanceof Object);
 //test commit
 
 // commot
+
+// commit3
